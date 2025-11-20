@@ -112,6 +112,13 @@ export default function InteractiveMap({
     setIsMounted(true);
   }, []);
 
+  // Request user location automatically when component mounts
+  useEffect(() => {
+    if (isMounted && showUserLocation && !userPosition && !geoLoading) {
+      requestLocation();
+    }
+  }, [isMounted, showUserLocation, userPosition, geoLoading, requestLocation]);
+
   // Center map on user location
   const centerOnUser = () => {
     if (userPosition && mapInstanceRef.current) {
@@ -299,10 +306,9 @@ export default function InteractiveMap({
       };
 
       calculateNewRoute(origin, destination);
-    } else if (!selectedLandmark && enableRouting) {
-      // Clear route when no landmark is selected
-      clearRoute();
     }
+    // NO limpiar la ruta cuando se deselecciona el landmark
+    // La ruta permanece visible en el mapa
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLandmark, userPosition, enableRouting]);
 

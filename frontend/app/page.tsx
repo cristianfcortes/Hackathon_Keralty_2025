@@ -43,9 +43,7 @@ export default function Home() {
   const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
     setSelectedLandmark(null);
-    // Clear route when modal closes
-    setCurrentRoute(null);
-    setRouteError(null);
+    // NO limpiar la ruta - mantenerla visible en el mapa
   }, []);
 
   const handleRouteCalculated = useCallback(
