@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import MapWrapper from './components/map/MapWrapper';
 import LandmarkModal from './components/map/LandmarkModal';
+import KeryCharacter from './components/KeryCharacter';
 import { useLandmarks } from '@/hooks/useLandmarks';
 import { useAttendance } from '@/hooks/useAttendance';
 import type { Landmark } from '@/types/landmark';
@@ -76,6 +77,7 @@ export default function Home() {
         onConfirmAttendance={handleConfirmAttendance}
         hasConfirmed={selectedLandmark ? confirmedLandmarks.has(selectedLandmark.id) : false}
       />
+      <KeryCharacter />
     </div>
   );
 }

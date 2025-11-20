@@ -31,7 +31,7 @@ export function useChat({ endpoint }: UseChatProps) {
       // Suponiendo que tu endpoint devuelve { text: "respuesta de GPT" }
       const gptMessage: Message = { text: data.text, type: "gpt" };
       setMessages((prev) => [...prev, gptMessage]);
-    } catch (err) {
+    } catch {
       const errorMessage: Message = { text: "Error al obtener respuesta", type: "gpt" };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {

@@ -90,7 +90,8 @@ export default function InteractiveMap({
     markersRef.current = [];
 
     // Add markers for landmarks
-    if (mapInstanceRef.current) {
+    const mapInstance = mapInstanceRef.current;
+    if (mapInstance) {
       landmarks.forEach((landmark) => {
         const marker = L.marker([landmark.coordinates.lat, landmark.coordinates.lng], {
           icon: customIcon,
@@ -115,7 +116,7 @@ export default function InteractiveMap({
         `;
 
         marker.bindPopup(popupContent);
-        marker.addTo(mapInstanceRef.current);
+        marker.addTo(mapInstance);
         markersRef.current.push(marker);
       });
     }

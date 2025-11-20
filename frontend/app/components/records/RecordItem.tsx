@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import type { Record } from '@/types/record';
-import { handleActivation, handleEscape } from '@/lib/accessibility/keyboard';
 
 interface RecordItemProps {
   record: Record;

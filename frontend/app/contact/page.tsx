@@ -7,7 +7,7 @@ export default function ContactPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
           <p className="text-gray-700 mb-4">
-            We're here to help! Reach out to us through any of the following methods.
+            We&apos;re here to help! Reach out to us through any of the following methods.
           </p>
         </section>
 
