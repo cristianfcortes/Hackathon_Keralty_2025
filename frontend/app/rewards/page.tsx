@@ -123,7 +123,7 @@ export default function RewardsPage() {
         <div className="mt-8 text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-2 border-gray-200 max-w-2xl mx-auto">
             <p className="text-lg font-semibold text-gray-700 italic mb-2">
-              "El cuidado de tu salud es una inversión, no un gasto."
+              &ldquo;El cuidado de tu salud es una inversión, no un gasto.&rdquo;
             </p>
             <p className="text-sm text-gray-600">
               Cada pequeño hábito saludable cuenta para tu bienestar

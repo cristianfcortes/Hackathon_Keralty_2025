@@ -169,23 +169,6 @@ export default function InteractiveMap({
 
         marker.on('click', () => onMarkerClick(landmark));
 
-        const popupContent = `
-          <div>
-            <h3 style="font-weight: 600; margin-bottom: 4px;">${landmark.name}</h3>
-            <p style="font-size: 14px; color: #4b5563; margin-bottom: 8px;">${landmark.description}</p>
-            <button 
-              onclick="window.dispatchEvent(new CustomEvent('landmark-click', { detail: '${landmark.id}' }))"
-              style="margin-top: 8px; padding: 4px 12px; background-color: #2563eb; color: white; border-radius: 4px; font-size: 14px; border: none; cursor: pointer;"
-              onmouseover="this.style.backgroundColor='#1d4ed8'"
-              onmouseout="this.style.backgroundColor='#2563eb'"
-              aria-label="Ver detalles de ${landmark.name}"
-            >
-              Ver Detalles
-            </button>
-          </div>
-        `;
-
-        /* marker.bindPopup(popupContent); */
         marker.addTo(mapInstance);
         markersRef.current.push(marker);
       });
@@ -382,7 +365,6 @@ export default function InteractiveMap({
           onModeChange={setTransportMode}
           onClose={() => {
             clearRoute();
-            onMarkerClick(null as any); // Close modal
           }}
           onOpenInMaps={handleOpenInMaps}
         />
