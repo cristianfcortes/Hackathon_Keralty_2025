@@ -52,7 +52,7 @@ export default function ProfessionalCard({ professional, onClick }: Professional
           )}
           {professional.contact.phone && (
             <p>
-              <span className="font-semibold">Phone:</span>{' '}
+              <span className="font-semibold">Teléfono:</span>{' '}
               <a
                 href={`tel:${professional.contact.phone}`}
                 className="text-blue-600 hover:underline"
@@ -63,20 +63,20 @@ export default function ProfessionalCard({ professional, onClick }: Professional
           )}
           {professional.languages && professional.languages.length > 0 && (
             <p>
-              <span className="font-semibold">Languages:</span>{' '}
+              <span className="font-semibold">Idiomas:</span>{' '}
               {professional.languages.join(', ')}
             </p>
           )}
           {professional.accessibilityServices && (
             <div>
-              <span className="font-semibold">Accessibility:</span>
+              <span className="font-semibold">Accesibilidad:</span>
               <ul className="list-disc list-inside ml-2">
-                {professional.accessibilityServices.signLanguage && <li>Sign language</li>}
+                {professional.accessibilityServices.signLanguage && <li>Lenguaje de señas</li>}
                 {professional.accessibilityServices.wheelchairAccessible && (
-                  <li>Wheelchair accessible</li>
+                  <li>Accesible en silla de ruedas</li>
                 )}
                 {professional.accessibilityServices.hearingAssistance && (
-                  <li>Hearing assistance</li>
+                  <li>Asistencia auditiva</li>
                 )}
               </ul>
             </div>

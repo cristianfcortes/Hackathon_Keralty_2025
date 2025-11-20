@@ -23,7 +23,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav role="navigation" aria-label="Main navigation">
+    <nav role="navigation" aria-label="Navegación principal">
       <ul className="flex gap-4 p-4 bg-white shadow">
         {navItems.map((item) => {
           const isActive = pathname === item.href;

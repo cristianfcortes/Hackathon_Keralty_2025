@@ -16,7 +16,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     <div
       className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
       role="listitem"
-      aria-label={`${message.role === 'user' ? 'You' : 'Kery'}: ${message.content}`}
+      aria-label={`${message.role === 'user' ? 'Tú' : 'Kery'}: ${message.content}`}
     >
       <div className={`flex ${isUser ? 'flex-row-reverse' : 'flex-row'} items-start gap-2 max-w-xs lg:max-w-md`}>
         {/* Avatar */}

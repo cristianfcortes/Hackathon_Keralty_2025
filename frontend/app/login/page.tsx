@@ -38,7 +38,7 @@ export default function Login() {
             type="submit"
             className="bg-blue-500 text-white py-2 rounded w-full font-bold text-base hover:bg-blue-600 transition duration-300 shadow"
           >
-            Login
+            Iniciar Sesión
           </button>
         </form>
         <div className="mt-4 w-full text-center">

@@ -57,7 +57,7 @@ export default function ChatInterface({
   };
 
   const chatAriaProps = getAriaProps({
-    label: 'Chat interface for asking questions about landmarks',
+    label: 'Interfaz de chat para hacer preguntas sobre lugares y servicios',
     role: 'log',
     live: 'polite',
     atomic: false,
@@ -126,14 +126,14 @@ export default function ChatInterface({
             placeholder="Escribe tu pregunta para Kery..."
             className="flex-1 p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             rows={2}
-            aria-label="Message input"
+            aria-label="Campo de entrada de mensaje"
             disabled={isLoading}
           />
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
             className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium shadow-md hover:shadow-lg disabled:shadow-none"
-            aria-label="Send message"
+            aria-label="Enviar mensaje"
           >
             {isLoading ? (
               <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

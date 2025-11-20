@@ -16,14 +16,14 @@ export default function RecordsList({
   onDelete,
 }: RecordsListProps) {
   const listAriaProps = getAriaProps({
-    label: 'To-do list',
+    label: 'Lista de tareas',
     role: 'list',
   });
 
   if (records.length === 0) {
     return (
       <div className="text-center py-12" role="status" aria-live="polite">
-        <p className="text-gray-500">No records yet. Create your first record to get started!</p>
+        <p className="text-gray-500">Aún no hay registros. ¡Crea tu primer registro para comenzar!</p>
       </div>
     );
   }

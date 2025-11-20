@@ -28,7 +28,7 @@ export default function LandmarkMarker({
       tabIndex={0}
       onClick={() => onClick(landmark)}
       onKeyDown={handleKeyDown}
-      aria-label={`${landmark.name} - Click to view details`}
+      aria-label={`${landmark.name} - Haz clic para ver detalles`}
       className={`cursor-pointer ${isSelected ? 'ring-2 ring-blue-500' : ''}`}
     >
       {/* Marker is handled by Leaflet Marker component */}

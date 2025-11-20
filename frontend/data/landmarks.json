@@ -117,5 +117,56 @@
       "visualAssistance": true,
       "notes": "EPS con participación activa en actividades de red y apoyo logístico a programas comunitarios."
     }
+  },
+  {
+    "id": "landmarks-002",
+    "name": "Hospital de la Universidad Nacional",
+    "description": "Hospital universitario con servicios médicos y quirúrgicos. Contacto: 601-316-5000. Dirección: Carrera 30 # 45-03.",
+    "coordinates": {
+      "lat": 4.6311,
+      "lng": -74.0939
+    },
+    "address": "Carrera 30 # 45-03, Bogotá, Colombia",
+    "category": "medical",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": true,
+      "visualAssistance": true,
+      "notes": "Hospital con acceso para personas con movilidad reducida y asistencia para personas con discapacidad auditiva y visual."
+    }
+  },
+  {
+    "id": "landmarks-003",
+    "name": "Biblioteca Virgilio Barco",
+    "description": "Biblioteca pública con una gran oferta de libros, actividades culturales y exposiciones. Contacto: 601-377-0715.",
+    "coordinates": {
+      "lat": 4.6445,
+      "lng": -74.1067
+    },
+    "address": "Av. Cra. 60 # 57-60, Bogotá, Colombia",
+    "category": "cultural",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": false,
+      "visualAssistance": false,
+      "notes": "Biblioteca con accesibilidad para personas con movilidad reducida, pero sin servicios especiales para personas con discapacidad auditiva o visual."
+    }
+  },
+  {
+    "id": "landmarks-004",
+    "name": "Parque El Salitre",
+    "description": "Parque urbano para recreación y actividades al aire libre. Ideal para caminar, hacer ejercicio y disfrutar de la naturaleza. Contacto: 601-313-1474.",
+    "coordinates": {
+      "lat": 4.6482,
+      "lng": -74.1096
+    },
+    "address": "Av. Calle 53 # 68-75, Bogotá, Colombia",
+    "category": "recreation",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": false,
+      "visualAssistance": false,
+      "notes": "Parque accesible para personas con movilidad reducida."
+    }
   }
 ]

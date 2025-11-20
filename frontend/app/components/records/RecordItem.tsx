@@ -48,7 +48,7 @@ export default function RecordItem({ record, onUpdate, onDelete }: RecordItemPro
       className="bg-white border rounded-lg p-4 hover:shadow-md transition-shadow"
       onKeyDown={handleKeyDown}
       role="listitem"
-      aria-label={`Record: ${record.title}, Status: ${record.status}`}
+      aria-label={`Registro: ${record.title}, Estado: ${record.status}`}
     >
       {isEditing ? (
         <div className="space-y-2">
@@ -57,7 +57,7 @@ export default function RecordItem({ record, onUpdate, onDelete }: RecordItemPro
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="Record title"
+            aria-label="Título del registro"
             autoFocus
           />
           <textarea
@@ -65,22 +65,22 @@ export default function RecordItem({ record, onUpdate, onDelete }: RecordItemPro
             onChange={(e) => setDescription(e.target.value)}
             className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows={3}
-            aria-label="Record description"
+            aria-label="Descripción del registro"
           />
           <div className="flex gap-2">
             <button
               onClick={handleSave}
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Save record"
+              aria-label="Guardar registro"
             >
-              Save
+              Guardar
             </button>
             <button
               onClick={handleCancel}
               className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
-              aria-label="Cancel editing"
+              aria-label="Cancelar edición"
             >
-              Cancel
+              Cancelar
             </button>
           </div>
         </div>
@@ -94,12 +94,12 @@ export default function RecordItem({ record, onUpdate, onDelete }: RecordItemPro
             <div className="flex gap-2 mt-2">
               <span
                 className={`px-2 py-1 rounded text-xs ${statusColors[record.status]}`}
-                aria-label={`Status: ${record.status}`}
+                aria-label={`Estado: ${record.status}`}
               >
                 {record.status}
               </span>
               {record.relatedLandmarkId && (
-                <span className="text-xs text-gray-500">Linked to landmark</span>
+                <span className="text-xs text-gray-500">Vinculado a lugar</span>
               )}
             </div>
           </div>
@@ -107,16 +107,16 @@ export default function RecordItem({ record, onUpdate, onDelete }: RecordItemPro
             <button
               onClick={() => setIsEditing(true)}
               className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label={`Edit record: ${record.title}`}
+              aria-label={`Editar registro: ${record.title}`}
             >
-              Edit
+              Editar
             </button>
             <button
               onClick={() => onDelete(record.id)}
               className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500"
-              aria-label={`Delete record: ${record.title}`}
+              aria-label={`Eliminar registro: ${record.title}`}
             >
-              Delete
+              Eliminar
             </button>
           </div>
         </div>

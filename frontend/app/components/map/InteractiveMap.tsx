@@ -67,7 +67,7 @@ export default function InteractiveMap({
   const mapAriaProps = useMemo(
     () =>
       getAriaProps({
-        label: 'Interactive map showing landmarks',
+        label: 'Mapa interactivo mostrando lugares de interés',
         role: 'application',
       }),
     []
@@ -118,7 +118,7 @@ export default function InteractiveMap({
       const container = map.getContainer();
       if (container) {
         container.setAttribute('role', 'application');
-        container.setAttribute('aria-label', 'Interactive map showing landmarks');
+        container.setAttribute('aria-label', 'Mapa interactivo mostrando lugares de interés');
         container.setAttribute('tabindex', '0');
       }
 
@@ -149,9 +149,9 @@ export default function InteractiveMap({
               style="margin-top: 8px; padding: 4px 12px; background-color: #2563eb; color: white; border-radius: 4px; font-size: 14px; border: none; cursor: pointer;"
               onmouseover="this.style.backgroundColor='#1d4ed8'"
               onmouseout="this.style.backgroundColor='#2563eb'"
-              aria-label="View details for ${landmark.name}"
+              aria-label="Ver detalles de ${landmark.name}"
             >
-              View Details
+              Ver Detalles
             </button>
           </div>
         `;

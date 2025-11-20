@@ -57,7 +57,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen" role="status" aria-live="polite">
-        <p>Loading map...</p>
+        <p>Cargando mapa...</p>
       </div>
     );
   }
@@ -69,7 +69,7 @@ export default function Home() {
         role="alert"
         aria-live="assertive"
       >
-        <p className="text-red-700">Error loading landmarks: {error.message}</p>
+        <p className="text-red-700">Error al cargar lugares: {error.message}</p>
       </div>
     );
   }

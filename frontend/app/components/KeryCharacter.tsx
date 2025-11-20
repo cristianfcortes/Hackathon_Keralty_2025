@@ -71,15 +71,15 @@ export default function KeryCharacter({
     <div 
       className="fixed bottom-4 left-4 z-50 flex items-end gap-3"
       role="complementary"
-      aria-label="Kery character assistant"
+      aria-label="Asistente Kery"
     >
       {/* Kery GIF */}
-      <div className="relative w-24 h-24 flex-shrink-0">
+      <div className="relative w-[150px] h-[150px] flex-shrink-0">
         <Image
           src="/kery.gif"
           alt="Kery character"
-          width={96}
-          height={96}
+          width={150}
+          height={150}
           className="object-contain"
           unoptimized
           priority={false}

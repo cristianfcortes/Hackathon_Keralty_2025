@@ -25,16 +25,16 @@ export default function DirectoryPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Medical Professionals Directory</h1>
+      <h1 className="text-3xl font-bold mb-6">Directorio de Profesionales Médicos</h1>
 
       <div className="mb-6">
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search professionals..."
+          placeholder="Buscar profesionales..."
           className="w-full md:w-1/2 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          aria-label="Search medical professionals"
+          aria-label="Buscar profesionales médicos"
         />
       </div>
 
@@ -65,7 +65,7 @@ export default function DirectoryPage() {
               )}
               {selectedProfessional.bio && <p className="text-gray-700">{selectedProfessional.bio}</p>}
               <div>
-                <h3 className="font-semibold mb-2">Contact Information</h3>
+                <h3 className="font-semibold mb-2">Información de Contacto</h3>
                 {selectedProfessional.contact.email && (
                   <p>
                     <span className="font-semibold">Email:</span>{' '}
@@ -79,7 +79,7 @@ export default function DirectoryPage() {
                 )}
                 {selectedProfessional.contact.phone && (
                   <p>
-                    <span className="font-semibold">Phone:</span>{' '}
+                    <span className="font-semibold">Teléfono:</span>{' '}
                     <a
                       href={`tel:${selectedProfessional.contact.phone}`}
                       className="text-blue-600 hover:underline"
@@ -90,7 +90,7 @@ export default function DirectoryPage() {
                 )}
                 {selectedProfessional.contact.address && (
                   <p>
-                    <span className="font-semibold">Address:</span>{' '}
+                    <span className="font-semibold">Dirección:</span>{' '}
                     {selectedProfessional.contact.address}
                   </p>
                 )}
@@ -98,9 +98,9 @@ export default function DirectoryPage() {
               <button
                 onClick={() => setSelectedProfessional(null)}
                 className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                aria-label="Close professional details"
+                aria-label="Cerrar detalles del profesional"
               >
-                Close
+                Cerrar
               </button>
             </div>
           </div>

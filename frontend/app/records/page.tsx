@@ -36,7 +36,7 @@ export default function RecordsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this record?')) {
+    if (confirm('¿Estás seguro de que quieres eliminar este registro?')) {
       try {
         await deleteRecord(id);
       } catch (err) {
@@ -48,7 +48,7 @@ export default function RecordsPage() {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <p>Loading records...</p>
+        <p>Cargando registros...</p>
       </div>
     );
   }
@@ -65,7 +65,7 @@ export default function RecordsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Patrocinadores</h1>
+      {/* <h1 className="text-3xl font-bold mb-6">Patrocinadores</h1> */}
 
       <form onSubmit={handleCreate} className="mb-6 bg-white p-4 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Agrega un activo en salud que ayude a la comunidad</h2>
@@ -76,17 +76,17 @@ export default function RecordsPage() {
             onChange={(e) => setNewRecordTitle(e.target.value)}
             placeholder="nombre del activo"
             className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label="New record title"
+            aria-label="Título del nuevo registro"
             required
             maxLength={200}
           />
           <textarea
             value={newRecordDescription}
             onChange={(e) => setNewRecordDescription(e.target.value)}
-            placeholder="Descripción (optional)"
+            placeholder="Descripción (opcional)"
             className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows={3}
-            aria-label="New record description"
+            aria-label="Descripción del nuevo registro"
           />
           <button
             type="submit"

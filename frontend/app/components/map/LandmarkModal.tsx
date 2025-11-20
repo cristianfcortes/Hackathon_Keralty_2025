@@ -42,7 +42,7 @@ export default function LandmarkModal({
   }
 
   const modalAriaProps = getAriaProps({
-    label: `Details for ${landmark.name}`,
+    label: `Detalles de ${landmark.name}`,
     role: 'dialog',
   });
 
@@ -70,7 +70,7 @@ export default function LandmarkModal({
             </h2>
             <button
               onClick={onClose}
-              aria-label="Close modal"
+              aria-label="Cerrar modal"
               className="text-gray-500 hover:text-gray-700 text-2xl"
             >
               ×
@@ -84,30 +84,30 @@ export default function LandmarkModal({
 
             {landmark.address && (
               <div>
-                <h3 className="font-semibold mb-1">Address</h3>
+                <h3 className="font-semibold mb-1">Dirección</h3>
                 <p className="text-gray-600">{landmark.address}</p>
               </div>
             )}
 
             {landmark.category && (
               <div>
-                <h3 className="font-semibold mb-1">Category</h3>
+                <h3 className="font-semibold mb-1">Categoría</h3>
                 <p className="text-gray-600 capitalize">{landmark.category}</p>
               </div>
             )}
 
             {landmark.accessibilityInfo && (
               <div>
-                <h3 className="font-semibold mb-2">Accessibility Information</h3>
+                <h3 className="font-semibold mb-2">Información de Accesibilidad</h3>
                 <ul className="list-disc list-inside space-y-1 text-gray-600">
                   {landmark.accessibilityInfo.wheelchairAccessible && (
-                    <li>Wheelchair accessible</li>
+                    <li>Accesible en silla de ruedas</li>
                   )}
                   {landmark.accessibilityInfo.hearingAssistance && (
-                    <li>Hearing assistance available</li>
+                    <li>Asistencia auditiva disponible</li>
                   )}
                   {landmark.accessibilityInfo.visualAssistance && (
-                    <li>Visual assistance available</li>
+                    <li>Asistencia visual disponible</li>
                   )}
                   {landmark.accessibilityInfo.notes && (
                     <li className="mt-2">{landmark.accessibilityInfo.notes}</li>
@@ -125,9 +125,9 @@ export default function LandmarkModal({
                     ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
                     : 'bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
                 }`}
-                aria-label={hasConfirmed ? 'Attendance already confirmed' : 'Confirm attendance'}
+                aria-label={hasConfirmed ? 'Asistencia ya confirmada' : 'Confirmar asistencia'}
               >
-                {hasConfirmed ? 'Attendance Confirmed' : 'Confirm Attendance'}
+                {hasConfirmed ? 'Asistencia Confirmada' : 'Confirmar Asistencia'}
               </button>
             </div>
           </div>
