@@ -148,3 +148,46 @@ p, li {
     opacity: 1;
   }
 }
+
+/* Leaflet custom heart markers */
+.custom-heart-marker {
+  background: transparent !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-heart-marker svg {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.custom-heart-marker:hover svg {
+  transform: scale(1.15);
+}
+
+/* Energy bar animations */
+@keyframes energy-increase {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.energy-increase-animation {
+  animation: energy-increase 0.3s ease-out;
+}
+
+/* Responsive adjustments for energy bar */
+@media (max-width: 640px) {
+  .energy-bar-container {
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+}

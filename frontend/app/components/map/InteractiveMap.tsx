@@ -5,6 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Landmark } from '@/types/landmark';
 import { getAriaProps } from '@/lib/accessibility/aria';
+import { getHeartIconHTML } from './HeartIcon';
 
 interface InteractiveMapProps {
   landmarks: Landmark[];
@@ -16,16 +17,16 @@ interface InteractiveMapProps {
 const defaultCenter: [number, number] = [5.0700, -75.5133]; // Manizales, Colombia
 const defaultZoom = 13;
 
-// Fix for default marker icon in Next.js
-const createCustomIcon = () => {
-  return new L.Icon({
-    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-    iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-    shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
+// Create custom heart icon based on landmark category
+const createHeartIcon = (category?: string) => {
+  const iconHTML = getHeartIconHTML(category, 36);
+  
+  return L.divIcon({
+    html: iconHTML,
+    className: 'custom-heart-marker',
+    iconSize: [36, 36],
+    iconAnchor: [18, 36],
+    popupAnchor: [0, -36],
   });
 };
 
@@ -49,7 +50,6 @@ export default function InteractiveMap({
     []
   );
 
-  const customIcon = useMemo(() => createCustomIcon(), []);
 
   useEffect(() => {
     setIsMounted(true);
@@ -93,8 +93,9 @@ export default function InteractiveMap({
     const mapInstance = mapInstanceRef.current;
     if (mapInstance) {
       landmarks.forEach((landmark) => {
+        const heartIcon = createHeartIcon(landmark.category);
         const marker = L.marker([landmark.coordinates.lat, landmark.coordinates.lng], {
-          icon: customIcon,
+          icon: heartIcon,
         });
 
         marker.on('click', () => onMarkerClick(landmark));
@@ -128,7 +129,7 @@ export default function InteractiveMap({
         markersRef.current = [];
       }
     };
-  }, [isMounted, landmarks, customIcon, center, zoom, onMarkerClick]);
+  }, [isMounted, landmarks, center, zoom, onMarkerClick]);
 
   // Handle popup button clicks
   useEffect(() => {

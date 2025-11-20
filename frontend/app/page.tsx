@@ -4,13 +4,16 @@ import { useState, useCallback } from 'react';
 import MapWrapper from './components/map/MapWrapper';
 import LandmarkModal from './components/map/LandmarkModal';
 import KeryCharacter from './components/KeryCharacter';
+import EnergyBar from './components/energy/EnergyBar';
 import { useLandmarks } from '@/hooks/useLandmarks';
 import { useAttendance } from '@/hooks/useAttendance';
+import { useEnergy } from '@/hooks/useEnergy';
 import type { Landmark } from '@/types/landmark';
 
 export default function Home() {
   const { landmarks, loading, error } = useLandmarks();
   const { confirmAttendance, hasConfirmed: checkHasConfirmed } = useAttendance();
+  const { energy, maxEnergy, score, increaseEnergy } = useEnergy();
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmedLandmarks, setConfirmedLandmarks] = useState<Set<string>>(new Set());
@@ -18,13 +21,17 @@ export default function Home() {
   const handleMarkerClick = useCallback((landmark: Landmark) => {
     setSelectedLandmark(landmark);
     setIsModalOpen(true);
+    
+    // Increase energy for visiting a landmark
+    increaseEnergy(10, 10);
+    
     // Check if already confirmed
     checkHasConfirmed(landmark.id).then((confirmed) => {
       if (confirmed) {
         setConfirmedLandmarks((prev) => new Set(prev).add(landmark.id));
       }
     });
-  }, [checkHasConfirmed]);
+  }, [checkHasConfirmed, increaseEnergy]);
 
   const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
@@ -36,12 +43,15 @@ export default function Home() {
       try {
         await confirmAttendance(landmarkId);
         setConfirmedLandmarks((prev) => new Set(prev).add(landmarkId));
+        
+        // Reward for confirming attendance
+        increaseEnergy(20, 25);
       } catch (error) {
         console.error('Failed to confirm attendance:', error);
         // Error handling could show a toast notification here
       }
     },
-    [confirmAttendance]
+    [confirmAttendance, increaseEnergy]
   );
 
   if (loading) {
@@ -70,6 +80,16 @@ export default function Home() {
         landmarks={landmarks}
         onMarkerClick={handleMarkerClick}
       />
+      
+      {/* Energy Bar - Top right Corner */}
+      <div className="absolute top-4 right-4 z-[1000] animate-fade-in">
+        <EnergyBar
+          currentEnergy={energy}
+          maxEnergy={maxEnergy}
+          score={score}
+        />
+      </div>
+      
       <LandmarkModal
         landmark={selectedLandmark}
         isOpen={isModalOpen}
