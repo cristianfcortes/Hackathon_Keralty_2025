@@ -32,7 +32,7 @@ export function useEnergy() {
       if (storedScore) {
         const parsedScore = parseInt(storedScore, 10);
         if (!isNaN(parsedScore)) {
-          setScore(Math.max(parsedScore, 0));
+          setScore(Math.max(parsedScore, 1240));
         }
       }
     }

@@ -191,3 +191,55 @@ p, li {
     transform-origin: top left;
   }
 }
+
+/* User Location Marker - Static (no animation) */
+.user-location-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* User location circle */
+.user-location-circle {
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+/* Center location button */
+.center-location-button {
+  transition: all 0.2s ease;
+}
+
+.center-location-button:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.center-location-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Location error message fade in */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.location-error {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+/* Responsive adjustments for location controls */
+@media (max-width: 640px) {
+  .center-location-button {
+    transform: scale(0.9);
+  }
+  
+  .center-location-button:hover:not(:disabled) {
+    transform: scale(0.95);
+  }
+}
