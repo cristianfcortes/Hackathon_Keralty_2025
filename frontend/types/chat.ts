@@ -4,6 +4,7 @@ export interface ChatMessage {
   content: string;
   timestamp: number;
   landmarkContext?: string[];
+  isTyping?: boolean;
 }
 
 export interface ChatHistory {

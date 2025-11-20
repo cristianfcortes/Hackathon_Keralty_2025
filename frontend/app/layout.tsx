@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-main-gray w-full`}
       >
         <SkipLink />
-        <Header />
+        {/* <Header /> */}
         <Navigation />
         <main id="main-content" role="main" className="max-w-screen-2xl mx-auto">
           {children}

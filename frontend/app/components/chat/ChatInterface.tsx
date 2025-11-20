@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
+import QuickQuestions from './QuickQuestions';
 import type { ChatMessage as ChatMessageType } from '@/types/chat';
 import { getAriaProps } from '@/lib/accessibility/aria';
 
@@ -40,6 +41,11 @@ export default function ChatInterface({
     inputRef.current?.focus();
   };
 
+  const handleQuickQuestion = async (question: string) => {
+    setInputValue(question);
+    await onSendMessage(question);
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -57,6 +63,9 @@ export default function ChatInterface({
     atomic: false,
   });
 
+  // Show quick questions only when there's just the welcome message
+  const showQuickQuestions = messages.length === 1 && messages[0].id === 'welcome-msg';
+
   return (
     <div className="flex flex-col h-full" {...chatAriaProps}>
       <div
@@ -66,17 +75,27 @@ export default function ChatInterface({
         aria-atomic="false"
       >
         {messages.length === 0 && (
-          <div className="text-center text-gray-500 mt-8">
-            <p>Start a conversation by asking about landmarks!</p>
+          <div className="text-center text-gray-400 mt-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-gradient-to-br from-blue-100 to-purple-100">
+              <span className="text-3xl">💬</span>
+            </div>
+            <p className="text-lg font-medium">Esperando a Kery...</p>
           </div>
         )}
         {messages.map((message) => (
           <ChatMessage key={message.id} message={message} />
         ))}
         {isLoading && (
-          <div className="flex justify-start">
-            <div className="bg-gray-200 rounded-lg p-3">
-              <p className="text-gray-600">Thinking...</p>
+          <div className="flex justify-start items-start gap-2">
+            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
+              K
+            </div>
+            <div className="bg-gray-200 rounded-lg rounded-bl-none px-4 py-3">
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
             </div>
           </div>
         )}
@@ -92,15 +111,20 @@ export default function ChatInterface({
         <div ref={messagesEndRef} />
       </div>
 
-      <form onSubmit={handleSubmit} className="border-t p-4">
-        <div className="flex gap-2">
+      <QuickQuestions 
+        onSelectQuestion={handleQuickQuestion}
+        isVisible={showQuickQuestions}
+      />
+
+      <form onSubmit={handleSubmit} className="border-t bg-gray-50 p-4">
+        <div className="flex gap-3">
           <textarea
             ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about landmarks..."
-            className="flex-1 p-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Escribe tu pregunta para Kery..."
+            className="flex-1 p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             rows={2}
             aria-label="Message input"
             disabled={isLoading}
@@ -108,12 +132,22 @@ export default function ChatInterface({
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-medium shadow-md hover:shadow-lg disabled:shadow-none"
             aria-label="Send message"
           >
-            Send
+            {isLoading ? (
+              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            ) : (
+              <span>Enviar</span>
+            )}
           </button>
         </div>
+        <p className="text-xs text-gray-500 mt-2">
+          Presiona Enter para enviar, Shift+Enter para nueva línea
+        </p>
       </form>
     </div>
   );

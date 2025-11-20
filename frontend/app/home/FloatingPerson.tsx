@@ -24,7 +24,7 @@ export default function FloatingPerson() {
       <div className="relative ml-4 bg-white text-gray-800 px-4 py-2 rounded-xl shadow-lg w-44 flex items-center flex-col">
         <p className="text-sm font-medium">¡Bienvenido a Bogotá!</p>
         <p className="text-sm font-medium">
-          Yo soy <strong>Localito</strong>, tu asistente virtual.
+          Yo soy <strong>Kery</strong>, tu asistente virtual.
         </p>
         <p className="text-sm font-medium">
           ¡Clikame y te ayudare a conocer esta hermosa cuidad!
