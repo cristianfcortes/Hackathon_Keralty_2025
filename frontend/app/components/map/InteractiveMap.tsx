@@ -9,6 +9,11 @@ import { getHeartIconHTML } from './HeartIcon';
 import { getUserLocationIconHTML } from './UserLocationIcon';
 import CenterLocationButton from './CenterLocationButton';
 import { useGeolocation, getGeolocationErrorMessage } from '@/hooks/useGeolocation';
+import { useRouting } from '@/hooks/useRouting';
+import RouteLayer from './RouteLayer';
+import RoutePanel from './RoutePanel';
+import { openInNativeMaps } from '@/lib/routing/maps-integration';
+import type { RoutePoint } from '@/types/routing';
 
 interface InteractiveMapProps {
   landmarks: Landmark[];
@@ -19,6 +24,8 @@ interface InteractiveMapProps {
   showLocationButton?: boolean;
   trackUserLocation?: boolean;
   locationCircleRadius?: number;
+  enableRouting?: boolean;
+  selectedLandmark?: Landmark | null;
 }
 
 const defaultCenter: [number, number] = [5.0700, -75.5133]; // Manizales, Colombia
@@ -46,6 +53,8 @@ export default function InteractiveMap({
   showLocationButton = true,
   trackUserLocation = false,
   locationCircleRadius = 100,
+  enableRouting = true,
+  selectedLandmark = null,
 }: InteractiveMapProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [isCentered, setIsCentered] = useState(false);
@@ -63,6 +72,26 @@ export default function InteractiveMap({
     loading: geoLoading,
     requestLocation,
   } = useGeolocation({ watch: trackUserLocation });
+
+  // Routing hook
+  const {
+    currentRoute,
+    loading: routeLoading,
+    error: routeError,
+    mode: transportMode,
+    calculateNewRoute,
+    setMode: setTransportMode,
+    clearRoute,
+  } = useRouting({
+    initialMode: 'foot',
+    enableCache: true,
+    onRouteCalculated: (route) => {
+      console.log('Route calculated:', route);
+    },
+    onError: (error) => {
+      console.error('Routing error:', error);
+    },
+  });
 
   const mapAriaProps = useMemo(
     () =>
@@ -263,6 +292,48 @@ export default function InteractiveMap({
     };
   }, [landmarks, onMarkerClick]);
 
+  // Calculate route when landmark is selected
+  useEffect(() => {
+    if (
+      enableRouting &&
+      selectedLandmark &&
+      userPosition &&
+      mapInstanceRef.current
+    ) {
+      const origin: RoutePoint = {
+        lat: userPosition.lat,
+        lng: userPosition.lng,
+      };
+      
+      const destination: RoutePoint = {
+        lat: selectedLandmark.coordinates.lat,
+        lng: selectedLandmark.coordinates.lng,
+      };
+
+      calculateNewRoute(origin, destination);
+    } else if (!selectedLandmark) {
+      // Clear route when no landmark is selected
+      clearRoute();
+    }
+  }, [selectedLandmark, userPosition, enableRouting, calculateNewRoute, clearRoute]);
+
+  // Handle opening route in native maps
+  const handleOpenInMaps = () => {
+    if (userPosition && selectedLandmark) {
+      const origin: RoutePoint = {
+        lat: userPosition.lat,
+        lng: userPosition.lng,
+      };
+      
+      const destination: RoutePoint = {
+        lat: selectedLandmark.coordinates.lat,
+        lng: selectedLandmark.coordinates.lng,
+      };
+
+      openInNativeMaps(origin, destination);
+    }
+  };
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -287,6 +358,35 @@ export default function InteractiveMap({
   return (
     <div className="w-full h-screen relative" {...mapAriaProps}>
       <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} className="z-0" />
+      
+      {/* Route Layer - renders route polyline on map */}
+      {enableRouting && (
+        <RouteLayer
+          route={currentRoute}
+          map={mapInstanceRef.current}
+          color="#2563EB"
+          weight={5}
+          opacity={0.7}
+          fitBounds={true}
+          fitBoundsPadding={[50, 50]}
+        />
+      )}
+
+      {/* Route Panel - shows route instructions */}
+      {enableRouting && (currentRoute || routeLoading || routeError) && (
+        <RoutePanel
+          route={currentRoute}
+          loading={routeLoading}
+          error={routeError}
+          currentMode={transportMode}
+          onModeChange={setTransportMode}
+          onClose={() => {
+            clearRoute();
+            onMarkerClick(null as any); // Close modal
+          }}
+          onOpenInMaps={handleOpenInMaps}
+        />
+      )}
       
       {/* Center Location Button */}
       {showLocationButton && (

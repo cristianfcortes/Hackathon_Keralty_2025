@@ -8,6 +8,8 @@ interface MapWrapperProps {
   onMarkerClick: (landmark: Landmark) => void;
   center?: [number, number];
   zoom?: number;
+  selectedLandmark?: Landmark | null;
+  enableRouting?: boolean;
 }
 
 // Dynamically import InteractiveMap with SSR disabled

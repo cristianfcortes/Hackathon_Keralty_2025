@@ -34,6 +34,30 @@ body {
   border-radius: 2px;
 }
 
+/* Route panel slide animation */
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.3s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-slide-in-left {
+    animation: none;
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 /* Skip link for keyboard navigation */
 .skip-link {
   position: absolute;

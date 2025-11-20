@@ -79,6 +79,8 @@ export default function Home() {
       <MapWrapper
         landmarks={landmarks}
         onMarkerClick={handleMarkerClick}
+        selectedLandmark={isModalOpen ? selectedLandmark : null}
+        enableRouting={true}
       />
       
       {/* Energy Bar - Top right Corner */}
