@@ -294,11 +294,12 @@ export default function InteractiveMap({
       };
 
       calculateNewRoute(origin, destination);
-    } else if (!selectedLandmark) {
+    } else if (!selectedLandmark && enableRouting) {
       // Clear route when no landmark is selected
       clearRoute();
     }
-  }, [selectedLandmark, userPosition, enableRouting, calculateNewRoute, clearRoute]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedLandmark, userPosition, enableRouting]);
 
   // Handle opening route in native maps
   const handleOpenInMaps = () => {

@@ -86,6 +86,12 @@ export function useRouting(options: UseRoutingOptions = {}): UseRoutingReturn {
   const lastOriginRef = useRef<RoutePoint | null>(null);
   const lastDestinationRef = useRef<RoutePoint | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const currentModeRef = useRef<TransportMode>(initialMode);
+
+  // Mantener currentModeRef sincronizado con state.mode
+  useEffect(() => {
+    currentModeRef.current = state.mode;
+  }, [state.mode]);
 
   /**
    * Limpia la ruta actual y reset del estado
@@ -114,13 +120,15 @@ export function useRouting(options: UseRoutingOptions = {}): UseRoutingReturn {
   const setMode = useCallback(
     async (newMode: TransportMode) => {
       setState((prev) => ({ ...prev, mode: newMode }));
+      // Actualizar el ref inmediatamente
+      currentModeRef.current = newMode;
 
       // Si hay una ruta activa, recalcular con el nuevo modo
       if (lastOriginRef.current && lastDestinationRef.current) {
         await calculateNewRoute(lastOriginRef.current, lastDestinationRef.current);
       }
     },
-    [] // Se actualizará en el efecto siguiente
+    [calculateNewRoute]
   );
 
   /**
@@ -205,7 +213,8 @@ export function useRouting(options: UseRoutingOptions = {}): UseRoutingReturn {
 
       try {
         // Intentar obtener del cache primero
-        const cachedRoute = getFromCache(origin, destination, state.mode);
+        const currentMode = currentModeRef.current;
+        const cachedRoute = getFromCache(origin, destination, currentMode);
         if (cachedRoute) {
           setState((prev) => ({
             ...prev,
@@ -222,7 +231,7 @@ export function useRouting(options: UseRoutingOptions = {}): UseRoutingReturn {
         const response = await calculateRoute(
           origin,
           destination,
-          state.mode,
+          currentMode,
           abortControllerRef.current.signal
         );
 
@@ -231,7 +240,7 @@ export function useRouting(options: UseRoutingOptions = {}): UseRoutingReturn {
         const alternatives = response.routes.slice(1);
 
         // Guardar en cache
-        saveToCache(origin, destination, state.mode, primaryRoute);
+        saveToCache(origin, destination, currentMode, primaryRoute);
 
         // Actualizar estado
         setState((prev) => ({
@@ -262,7 +271,7 @@ export function useRouting(options: UseRoutingOptions = {}): UseRoutingReturn {
         onError?.(routingError);
       }
     },
-    [state.mode, getFromCache, saveToCache, onRouteCalculated, onError]
+    [getFromCache, saveToCache, onRouteCalculated, onError]
   );
 
   /**
