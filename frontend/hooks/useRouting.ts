@@ -115,23 +115,6 @@ export function useRouting(options: UseRoutingOptions = {}): UseRoutingReturn {
   }, []);
 
   /**
-   * Cambia el modo de transporte y recalcula si hay una ruta activa
-   */
-  const setMode = useCallback(
-    async (newMode: TransportMode) => {
-      setState((prev) => ({ ...prev, mode: newMode }));
-      // Actualizar el ref inmediatamente
-      currentModeRef.current = newMode;
-
-      // Si hay una ruta activa, recalcular con el nuevo modo
-      if (lastOriginRef.current && lastDestinationRef.current) {
-        await calculateNewRoute(lastOriginRef.current, lastDestinationRef.current);
-      }
-    },
-    [calculateNewRoute]
-  );
-
-  /**
    * Lee una ruta del cache de localStorage
    */
   const getFromCache = useCallback(
@@ -272,6 +255,23 @@ export function useRouting(options: UseRoutingOptions = {}): UseRoutingReturn {
       }
     },
     [getFromCache, saveToCache, onRouteCalculated, onError]
+  );
+
+  /**
+   * Cambia el modo de transporte y recalcula si hay una ruta activa
+   */
+  const setMode = useCallback(
+    async (newMode: TransportMode) => {
+      setState((prev) => ({ ...prev, mode: newMode }));
+      // Actualizar el ref inmediatamente
+      currentModeRef.current = newMode;
+
+      // Si hay una ruta activa, recalcular con el nuevo modo
+      if (lastOriginRef.current && lastDestinationRef.current) {
+        await calculateNewRoute(lastOriginRef.current, lastDestinationRef.current);
+      }
+    },
+    [calculateNewRoute]
   );
 
   /**
