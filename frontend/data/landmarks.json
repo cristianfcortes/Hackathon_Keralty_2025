@@ -1,0 +1,54 @@
+[
+  {
+    "id": "landmark-001",
+    "name": "Central Medical Center",
+    "description": "A modern medical facility with full accessibility features including wheelchair access, sign language interpreters, and visual assistance services.",
+    "coordinates": {
+      "lat": 40.7589,
+      "lng": -73.9851
+    },
+    "address": "123 Main Street, New York, NY 10001",
+    "category": "medical",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": true,
+      "visualAssistance": true,
+      "notes": "Sign language interpreters available upon request. Braille signage throughout the facility."
+    }
+  },
+  {
+    "id": "landmark-002",
+    "name": "Community Health Clinic",
+    "description": "A community-focused health clinic providing accessible healthcare services to all residents.",
+    "coordinates": {
+      "lat": 40.7489,
+      "lng": -73.9681
+    },
+    "address": "456 Oak Avenue, New York, NY 10002",
+    "category": "medical",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": true,
+      "visualAssistance": false,
+      "notes": "Wheelchair accessible entrance and exam rooms available."
+    }
+  },
+  {
+    "id": "landmark-003",
+    "name": "Accessible Park Entrance",
+    "description": "A fully accessible park entrance with smooth pathways, accessible restrooms, and audio guides available.",
+    "coordinates": {
+      "lat": 40.7829,
+      "lng": -73.9654
+    },
+    "address": "789 Park Boulevard, New York, NY 10003",
+    "category": "recreation",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": false,
+      "visualAssistance": true,
+      "notes": "Audio guide system available at the entrance. All pathways are wheelchair accessible."
+    }
+  }
+]
+

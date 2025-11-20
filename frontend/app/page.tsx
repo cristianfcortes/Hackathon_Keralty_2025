@@ -1,0 +1,82 @@
+'use client';
+
+import { useState, useCallback } from 'react';
+import MapWrapper from './components/map/MapWrapper';
+import LandmarkModal from './components/map/LandmarkModal';
+import { useLandmarks } from '@/hooks/useLandmarks';
+import { useAttendance } from '@/hooks/useAttendance';
+import type { Landmark } from '@/types/landmark';
+
+export default function Home() {
+  const { landmarks, loading, error } = useLandmarks();
+  const { confirmAttendance, hasConfirmed: checkHasConfirmed } = useAttendance();
+  const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirmedLandmarks, setConfirmedLandmarks] = useState<Set<string>>(new Set());
+
+  const handleMarkerClick = useCallback((landmark: Landmark) => {
+    setSelectedLandmark(landmark);
+    setIsModalOpen(true);
+    // Check if already confirmed
+    checkHasConfirmed(landmark.id).then((confirmed) => {
+      if (confirmed) {
+        setConfirmedLandmarks((prev) => new Set(prev).add(landmark.id));
+      }
+    });
+  }, [checkHasConfirmed]);
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+    setSelectedLandmark(null);
+  }, []);
+
+  const handleConfirmAttendance = useCallback(
+    async (landmarkId: string) => {
+      try {
+        await confirmAttendance(landmarkId);
+        setConfirmedLandmarks((prev) => new Set(prev).add(landmarkId));
+      } catch (error) {
+        console.error('Failed to confirm attendance:', error);
+        // Error handling could show a toast notification here
+      }
+    },
+    [confirmAttendance]
+  );
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen" role="status" aria-live="polite">
+        <p>Loading map...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div
+        className="p-4 bg-red-100 border border-red-400 rounded m-4"
+        role="alert"
+        aria-live="assertive"
+      >
+        <p className="text-red-700">Error loading landmarks: {error.message}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-full h-screen">
+      <MapWrapper
+        landmarks={landmarks}
+        onMarkerClick={handleMarkerClick}
+      />
+      <LandmarkModal
+        landmark={selectedLandmark}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onConfirmAttendance={handleConfirmAttendance}
+        hasConfirmed={selectedLandmark ? confirmedLandmarks.has(selectedLandmark.id) : false}
+      />
+    </div>
+  );
+}
+

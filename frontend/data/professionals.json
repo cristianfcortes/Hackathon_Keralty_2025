@@ -1,0 +1,61 @@
+[
+  {
+    "id": "prof-001",
+    "name": "Jane Smith",
+    "title": "Dr.",
+    "specialty": "Cardiology",
+    "organization": "Central Medical Center",
+    "contact": {
+      "email": "jane.smith@medicalcenter.com",
+      "phone": "+1-555-0123",
+      "address": "123 Main Street, New York, NY 10001",
+      "website": "https://example.com/dr-jane-smith"
+    },
+    "languages": ["English", "Spanish", "ASL"],
+    "accessibilityServices": {
+      "signLanguage": true,
+      "wheelchairAccessible": true,
+      "hearingAssistance": true
+    },
+    "bio": "Dr. Jane Smith is a board-certified cardiologist with over 15 years of experience in treating cardiovascular conditions. She is committed to providing accessible healthcare to all patients."
+  },
+  {
+    "id": "prof-002",
+    "name": "Michael Johnson",
+    "title": "Dr.",
+    "specialty": "General Practice",
+    "organization": "Community Health Clinic",
+    "contact": {
+      "email": "michael.johnson@clinic.com",
+      "phone": "+1-555-0124",
+      "address": "456 Oak Avenue, New York, NY 10002"
+    },
+    "languages": ["English", "French"],
+    "accessibilityServices": {
+      "signLanguage": false,
+      "wheelchairAccessible": true,
+      "hearingAssistance": false
+    },
+    "bio": "Dr. Michael Johnson provides comprehensive primary care services with a focus on preventive medicine and patient education."
+  },
+  {
+    "id": "prof-003",
+    "name": "Sarah Williams",
+    "title": "RN",
+    "specialty": "Nursing",
+    "organization": "Central Medical Center",
+    "contact": {
+      "email": "sarah.williams@medicalcenter.com",
+      "phone": "+1-555-0125",
+      "address": "123 Main Street, New York, NY 10001"
+    },
+    "languages": ["English", "Spanish", "ASL"],
+    "accessibilityServices": {
+      "signLanguage": true,
+      "wheelchairAccessible": true,
+      "hearingAssistance": true
+    },
+    "bio": "Sarah Williams is a registered nurse specializing in patient care coordination and accessibility services."
+  }
+]
+
