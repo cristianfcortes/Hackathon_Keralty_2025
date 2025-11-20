@@ -46,6 +46,12 @@ export default function Home() {
     // NO limpiar la ruta - mantenerla visible en el mapa
   }, []);
 
+  const handleClearRoute = useCallback(() => {
+    setCurrentRoute(null);
+    setRouteError(null);
+    setRouteLoading(false);
+  }, []);
+
   const handleRouteCalculated = useCallback(
     (route: Route | null, loading: boolean, error: Error | null, mode: TransportMode) => {
       setCurrentRoute(route);
@@ -111,6 +117,32 @@ export default function Home() {
           score={score}
         />
       </div>
+
+      {/* Clear Route Button - Only visible when route exists */}
+      {currentRoute && !isModalOpen && (
+        <div className="absolute top-4 left-4 z-[1000] animate-fade-in">
+          <button
+            onClick={handleClearRoute}
+            className="bg-white hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg shadow-lg border-2 border-gray-200 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2"
+            aria-label="Limpiar ruta del mapa"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+            <span>Limpiar ruta</span>
+          </button>
+        </div>
+      )}
       
       <LandmarkModal
         landmark={selectedLandmark}
