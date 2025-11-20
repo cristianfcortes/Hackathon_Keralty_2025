@@ -13,7 +13,7 @@ interface InteractiveMapProps {
   zoom?: number;
 }
 
-const defaultCenter: [number, number] = [40.7589, -73.9851];
+const defaultCenter: [number, number] = [5.0700, -75.5133]; // Manizales, Colombia
 const defaultZoom = 13;
 
 // Fix for default marker icon in Next.js

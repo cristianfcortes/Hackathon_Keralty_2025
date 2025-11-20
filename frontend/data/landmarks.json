@@ -1,54 +1,121 @@
 [
   {
     "id": "landmark-001",
-    "name": "Central Medical Center",
-    "description": "A modern medical facility with full accessibility features including wheelchair access, sign language interpreters, and visual assistance services.",
+    "name": "Ceder",
+    "description": "Activación de redes en la población beneficiaria de la IPS, sensibilizaciones a sus colaboradores. Contacto: Beatriz Eugenia Gonzalez - Tel: 3148947176 - Email: Beatrizeugenia.gonzalez@confa.co",
     "coordinates": {
-      "lat": 40.7589,
-      "lng": -73.9851
+      "lat": 5.0700,
+      "lng": -75.5133
     },
-    "address": "123 Main Street, New York, NY 10001",
-    "category": "medical",
+    "address": "Manizales, Colombia",
+    "category": "organizacion",
     "accessibilityInfo": {
       "wheelchairAccessible": true,
       "hearingAssistance": true,
       "visualAssistance": true,
-      "notes": "Sign language interpreters available upon request. Braille signage throughout the facility."
+      "notes": "Organización enfocada en activación de redes y sensibilización comunitaria."
     }
   },
   {
     "id": "landmark-002",
-    "name": "Community Health Clinic",
-    "description": "A community-focused health clinic providing accessible healthcare services to all residents.",
+    "name": "Centro Médico Sanitas",
+    "description": "Activación de redes en la población beneficiaria de la IPS, sensibilizaciones a sus colaboradores, facilitación de espacios para reuniones de la Red. Contacto: Paula Romero - Tel: 3006528541 - Email: lidereducacion@cedercolombia.org",
     "coordinates": {
-      "lat": 40.7489,
-      "lng": -73.9681
+      "lat": 5.0750,
+      "lng": -75.5100
     },
-    "address": "456 Oak Avenue, New York, NY 10002",
+    "address": "Manizales, Colombia",
     "category": "medical",
     "accessibilityInfo": {
       "wheelchairAccessible": true,
       "hearingAssistance": true,
-      "visualAssistance": false,
-      "notes": "Wheelchair accessible entrance and exam rooms available."
+      "visualAssistance": true,
+      "notes": "Centro médico con espacios para reuniones comunitarias y activación de redes."
     }
   },
   {
     "id": "landmark-003",
-    "name": "Accessible Park Entrance",
-    "description": "A fully accessible park entrance with smooth pathways, accessible restrooms, and audio guides available.",
+    "name": "Club Rotario Capítulo Manizales",
+    "description": "Agrupación social. Vinculación en procesos de sensibilización masiva, apoyo en ayudas protésicas. Contacto: Mónica Giraldo - Tel: 3187164473 - Email: monica.giraldo.mejia7@gmail.com",
     "coordinates": {
-      "lat": 40.7829,
-      "lng": -73.9654
+      "lat": 5.0650,
+      "lng": -75.5150
     },
-    "address": "789 Park Boulevard, New York, NY 10003",
-    "category": "recreation",
+    "address": "Manizales, Colombia",
+    "category": "organizacion",
     "accessibilityInfo": {
       "wheelchairAccessible": true,
-      "hearingAssistance": false,
+      "hearingAssistance": true,
       "visualAssistance": true,
-      "notes": "Audio guide system available at the entrance. All pathways are wheelchair accessible."
+      "notes": "Agrupación social que apoya con ayudas protésicas y sensibilización comunitaria."
+    }
+  },
+  {
+    "id": "landmark-004",
+    "name": "Confa - Servicios Proyecto Adulto Mayor",
+    "description": "Servicios de bienestar para el adulto mayor. Contacto: Diana Maria Restrepo - Tel: 3148145779 - Email: rec_dianamr@confamiliare s.com",
+    "coordinates": {
+      "lat": 5.0720,
+      "lng": -75.5120
+    },
+    "address": "Manizales, Colombia",
+    "category": "servicios",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": true,
+      "visualAssistance": true,
+      "notes": "Servicios especializados para el bienestar del adulto mayor."
+    }
+  },
+  {
+    "id": "landmark-005",
+    "name": "Corporación de la Sagrada Familia",
+    "description": "Apoyo a mujeres en su proceso de gestación, activación de redes y círculos de cuidado en su entorno, apoyo a la comunidad de San Sebastián. Contacto: Aydée Gonzalez Beatriz - Tel: 3016896656 / 3023415663 - Email: corpofami@hotmail.com",
+    "coordinates": {
+      "lat": 5.0680,
+      "lng": -75.5080
+    },
+    "address": "Barrio San Sebastián, Manizales, Colombia",
+    "category": "organizacion",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": true,
+      "visualAssistance": true,
+      "notes": "Apoyo a mujeres gestantes y activación de redes comunitarias en San Sebastián."
+    }
+  },
+  {
+    "id": "landmark-006",
+    "name": "Corporación Obras Sociales Betania",
+    "description": "Apoyo a adultos mayores y sus familias de los Barrios San Sebastián y Solferino. Espacios de reunión CIC San Sebastián. Contacto: Hermana Mayely - Tel: 3148326549 - Email: Lorenaduv@hotmail.com",
+    "coordinates": {
+      "lat": 5.0660,
+      "lng": -75.5090
+    },
+    "address": "CIC San Sebastián, Barrios San Sebastián y Solferino, Manizales, Colombia",
+    "category": "organizacion",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": true,
+      "visualAssistance": true,
+      "notes": "Apoyo a adultos mayores en los barrios San Sebastián y Solferino. Espacios de reunión disponibles."
+    }
+  },
+  {
+    "id": "landmark-007",
+    "name": "EPS Sanitas y Colsanitas",
+    "description": "Sensibilización a los colaboradores, participación en las actividades de la red, apoyo logístico al Programa. Contacto: Claudia Victoria Arbelaez - Tel: 3183930913 - Email: cvarbela@colsanitas.com",
+    "coordinates": {
+      "lat": 5.0730,
+      "lng": -75.5110
+    },
+    "address": "Manizales, Colombia",
+    "category": "medical",
+    "accessibilityInfo": {
+      "wheelchairAccessible": true,
+      "hearingAssistance": true,
+      "visualAssistance": true,
+      "notes": "EPS con participación activa en actividades de red y apoyo logístico a programas comunitarios."
     }
   }
 ]
-
