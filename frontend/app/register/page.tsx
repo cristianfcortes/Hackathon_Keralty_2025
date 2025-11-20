@@ -10,7 +10,7 @@ export default function Register() {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 py-10">
-      <h1 className="text-3xl font-extrabold text-blue-500 mb-6 tracking-tight text-center drop-shadow">Local Trip Bogotá</h1>
+      <h1 className="text-3xl font-extrabold text-blue-500 mb-6 tracking-tight text-center drop-shadow">WeKare Keralty</h1>
       <div className="w-[320px] bg-white rounded-xl shadow-lg border border-blue-200 flex flex-col items-center p-6">
         <h2 className="text-xl font-bold mb-3 text-blue-700 text-center">Registro</h2>
         <form onSubmit={register} className="w-full gap-5 flex flex-col">

@@ -156,7 +156,7 @@ export default function InteractiveMap({
           </div>
         `;
 
-        marker.bindPopup(popupContent);
+        /* marker.bindPopup(popupContent); */
         marker.addTo(mapInstance);
         markersRef.current.push(marker);
       });

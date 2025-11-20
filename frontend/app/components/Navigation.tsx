@@ -7,9 +7,10 @@ import { handleActivation } from '@/lib/accessibility/keyboard';
 const navItems = [
   { href: '/', label: 'Inicio' },
   { href: '/chat_page', label: 'Chat' },
-  { href: '/records', label: 'Records' },
-  { href: '/directory', label: 'Directory' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/records', label: 'Intercambio' },
+  { href: '/directory', label: 'Directorio' },
+  { href: '/rewards', label: 'Recompensas' },
+  { href: '/contact', label: 'Contacto' },
 ];
 
 export default function Navigation() {
