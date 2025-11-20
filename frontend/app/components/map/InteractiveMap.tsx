@@ -11,9 +11,8 @@ import CenterLocationButton from './CenterLocationButton';
 import { useGeolocation, getGeolocationErrorMessage } from '@/hooks/useGeolocation';
 import { useRouting } from '@/hooks/useRouting';
 import RouteLayer from './RouteLayer';
-import RoutePanel from './RoutePanel';
 import { openInNativeMaps } from '@/lib/routing/maps-integration';
-import type { RoutePoint } from '@/types/routing';
+import type { RoutePoint, Route, TransportMode } from '@/types/routing';
 
 interface InteractiveMapProps {
   landmarks: Landmark[];
@@ -26,6 +25,9 @@ interface InteractiveMapProps {
   locationCircleRadius?: number;
   enableRouting?: boolean;
   selectedLandmark?: Landmark | null;
+  onRouteCalculated?: (route: Route | null, loading: boolean, error: Error | null, mode: TransportMode) => void;
+  onModeChange?: (mode: TransportMode) => void;
+  onOpenInMaps?: () => void;
 }
 
 const defaultCenter: [number, number] = [5.0700, -75.5133]; // Manizales, Colombia
@@ -55,6 +57,9 @@ export default function InteractiveMap({
   locationCircleRadius = 100,
   enableRouting = true,
   selectedLandmark = null,
+  onRouteCalculated,
+  onModeChange: externalOnModeChange,
+  onOpenInMaps: externalOnOpenInMaps,
 }: InteractiveMapProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [isCentered, setIsCentered] = useState(false);
@@ -301,6 +306,21 @@ export default function InteractiveMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLandmark, userPosition, enableRouting]);
 
+  // Notify parent of route state changes
+  useEffect(() => {
+    if (onRouteCalculated) {
+      onRouteCalculated(currentRoute, routeLoading, routeError, transportMode);
+    }
+  }, [currentRoute, routeLoading, routeError, transportMode, onRouteCalculated]);
+
+  // Handle mode change
+  const handleModeChange = (mode: TransportMode) => {
+    setTransportMode(mode);
+    if (externalOnModeChange) {
+      externalOnModeChange(mode);
+    }
+  };
+
   // Handle opening route in native maps
   const handleOpenInMaps = () => {
     if (userPosition && selectedLandmark) {
@@ -315,6 +335,10 @@ export default function InteractiveMap({
       };
 
       openInNativeMaps(origin, destination);
+      
+      if (externalOnOpenInMaps) {
+        externalOnOpenInMaps();
+      }
     }
   };
 
@@ -353,21 +377,6 @@ export default function InteractiveMap({
           opacity={0.7}
           fitBounds={true}
           fitBoundsPadding={[50, 50]}
-        />
-      )}
-
-      {/* Route Panel - shows route instructions */}
-      {enableRouting && (currentRoute || routeLoading || routeError) && (
-        <RoutePanel
-          route={currentRoute}
-          loading={routeLoading}
-          error={routeError}
-          currentMode={transportMode}
-          onModeChange={setTransportMode}
-          onClose={() => {
-            clearRoute();
-          }}
-          onOpenInMaps={handleOpenInMaps}
         />
       )}
       

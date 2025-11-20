@@ -9,6 +9,7 @@ import { useLandmarks } from '@/hooks/useLandmarks';
 import { useAttendance } from '@/hooks/useAttendance';
 import { useEnergy } from '@/hooks/useEnergy';
 import type { Landmark } from '@/types/landmark';
+import type { Route, TransportMode } from '@/types/routing';
 
 export default function Home() {
   const { landmarks, loading, error } = useLandmarks();
@@ -17,6 +18,12 @@ export default function Home() {
   const [selectedLandmark, setSelectedLandmark] = useState<Landmark | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmedLandmarks, setConfirmedLandmarks] = useState<Set<string>>(new Set());
+  
+  // Routing state
+  const [currentRoute, setCurrentRoute] = useState<Route | null>(null);
+  const [routeLoading, setRouteLoading] = useState(false);
+  const [routeError, setRouteError] = useState<Error | null>(null);
+  const [transportMode, setTransportMode] = useState<TransportMode>('foot');
 
   const handleMarkerClick = useCallback((landmark: Landmark) => {
     setSelectedLandmark(landmark);
@@ -36,7 +43,20 @@ export default function Home() {
   const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
     setSelectedLandmark(null);
+    // Clear route when modal closes
+    setCurrentRoute(null);
+    setRouteError(null);
   }, []);
+
+  const handleRouteCalculated = useCallback(
+    (route: Route | null, loading: boolean, error: Error | null, mode: TransportMode) => {
+      setCurrentRoute(route);
+      setRouteLoading(loading);
+      setRouteError(error);
+      setTransportMode(mode);
+    },
+    []
+  );
 
   const handleConfirmAttendance = useCallback(
     async (landmarkId: string) => {
@@ -81,6 +101,8 @@ export default function Home() {
         onMarkerClick={handleMarkerClick}
         selectedLandmark={isModalOpen ? selectedLandmark : null}
         enableRouting={true}
+        onRouteCalculated={handleRouteCalculated}
+        onModeChange={setTransportMode}
       />
       
       {/* Energy Bar - Top right Corner */}
@@ -98,6 +120,14 @@ export default function Home() {
         onClose={handleCloseModal}
         onConfirmAttendance={handleConfirmAttendance}
         hasConfirmed={selectedLandmark ? confirmedLandmarks.has(selectedLandmark.id) : false}
+        route={currentRoute}
+        routeLoading={routeLoading}
+        routeError={routeError}
+        currentMode={transportMode}
+        onModeChange={setTransportMode}
+        onOpenInMaps={() => {
+          // The handleOpenInMaps is handled in InteractiveMap
+        }}
       />
       <KeryCharacter />
     </div>

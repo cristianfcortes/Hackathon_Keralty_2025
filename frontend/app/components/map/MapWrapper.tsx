@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import type { Landmark } from '@/types/landmark';
+import type { Route, TransportMode } from '@/types/routing';
 
 interface MapWrapperProps {
   landmarks: Landmark[];
@@ -10,6 +11,9 @@ interface MapWrapperProps {
   zoom?: number;
   selectedLandmark?: Landmark | null;
   enableRouting?: boolean;
+  onRouteCalculated?: (route: Route | null, loading: boolean, error: Error | null, mode: TransportMode) => void;
+  onModeChange?: (mode: TransportMode) => void;
+  onOpenInMaps?: () => void;
 }
 
 // Dynamically import InteractiveMap with SSR disabled
