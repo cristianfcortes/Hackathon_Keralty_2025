@@ -62,6 +62,11 @@ export default function Home() {
     []
   );
 
+  const handleModeChange = useCallback((mode: TransportMode) => {
+    setTransportMode(mode);
+    // This will be propagated to InteractiveMap
+  }, []);
+
   const handleConfirmAttendance = useCallback(
     async (landmarkId: string) => {
       try {
@@ -106,7 +111,8 @@ export default function Home() {
         selectedLandmark={isModalOpen ? selectedLandmark : null}
         enableRouting={true}
         onRouteCalculated={handleRouteCalculated}
-        onModeChange={setTransportMode}
+        onModeChange={handleModeChange}
+        currentMode={transportMode}
       />
       
       {/* Energy Bar - Top right Corner */}
@@ -154,7 +160,7 @@ export default function Home() {
         routeLoading={routeLoading}
         routeError={routeError}
         currentMode={transportMode}
-        onModeChange={setTransportMode}
+        onModeChange={handleModeChange}
         onOpenInMaps={() => {
           // The handleOpenInMaps is handled in InteractiveMap
         }}

@@ -14,6 +14,7 @@ interface MapWrapperProps {
   onRouteCalculated?: (route: Route | null, loading: boolean, error: Error | null, mode: TransportMode) => void;
   onModeChange?: (mode: TransportMode) => void;
   onOpenInMaps?: () => void;
+  currentMode?: TransportMode;
 }
 
 // Dynamically import InteractiveMap with SSR disabled

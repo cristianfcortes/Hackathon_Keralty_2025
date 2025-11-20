@@ -28,6 +28,7 @@ interface InteractiveMapProps {
   onRouteCalculated?: (route: Route | null, loading: boolean, error: Error | null, mode: TransportMode) => void;
   onModeChange?: (mode: TransportMode) => void;
   onOpenInMaps?: () => void;
+  currentMode?: TransportMode;
 }
 
 const defaultCenter: [number, number] = [5.0700, -75.5133]; // Manizales, Colombia
@@ -60,6 +61,7 @@ export default function InteractiveMap({
   onRouteCalculated,
   onModeChange: externalOnModeChange,
   onOpenInMaps: externalOnOpenInMaps,
+  currentMode: externalCurrentMode,
 }: InteractiveMapProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [isCentered, setIsCentered] = useState(false);
@@ -287,7 +289,14 @@ export default function InteractiveMap({
     };
   }, [landmarks, onMarkerClick]);
 
-  // Calculate route when landmark is selected
+  // Sync external mode with internal mode
+  useEffect(() => {
+    if (externalCurrentMode && externalCurrentMode !== transportMode) {
+      setTransportMode(externalCurrentMode);
+    }
+  }, [externalCurrentMode, transportMode, setTransportMode]);
+
+  // Calculate route when landmark is selected or mode changes
   useEffect(() => {
     if (
       enableRouting &&
@@ -311,6 +320,35 @@ export default function InteractiveMap({
     // La ruta permanece visible en el mapa
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLandmark, userPosition, enableRouting]);
+
+  // Recalculate route when mode changes (even if modal is closed)
+  useEffect(() => {
+    if (
+      enableRouting &&
+      userPosition &&
+      currentRoute && // Only recalculate if there's an existing route
+      externalCurrentMode
+    ) {
+      // Find the destination from the current route
+      const routeGeometry = currentRoute.geometry;
+      if (routeGeometry && routeGeometry.length > 0) {
+        const origin: RoutePoint = {
+          lat: userPosition.lat,
+          lng: userPosition.lng,
+        };
+        
+        // Get destination from the last point in the route
+        const lastPoint = routeGeometry[routeGeometry.length - 1];
+        const destination: RoutePoint = {
+          lat: lastPoint[1], // GeoJSON format is [lng, lat]
+          lng: lastPoint[0],
+        };
+
+        calculateNewRoute(origin, destination);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalCurrentMode]);
 
   // Notify parent of route state changes
   useEffect(() => {
